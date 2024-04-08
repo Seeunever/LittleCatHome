@@ -48,7 +48,10 @@ const server = http.createServer((req, res) => {
                         }else{
                             if(results[0].username === reqInfo.username & results[0].password === reqInfo.password){
                                 //登录成功
-                                res.end("1");
+                                let resInfo = [];
+                                resInfo.userId = reqInfo.id;
+                                resInfo.resResult = "1";
+                                res.end(JSON.stringify(resInfo));
                             }
                         }
                     });

@@ -46,8 +46,10 @@
                 login.send(userInfo);
                 login.onreadystatechange = function(){
                     if(this.readyState == 4 & this.status == 200){
-                        if(login.responseText === '1'){
+                        let resInfo = JSON.parse(login.responseText);
+                        if(resInfo.resResult === '1'){
                             alert("登录成功");
+                            alert(resInfo.userId);
                             router.push('/userHome');
                         }
                     }

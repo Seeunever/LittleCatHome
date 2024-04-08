@@ -7,7 +7,7 @@ const routes = [
     {path:'/', component:IndexHome},
     {path:'/register', component:RegisterForm},
     {path:'/login', component:LoginForm},
-    {path:'/userHome', component:UserHome},
+    {path:'/userHome/:id', component:UserHome},
 ]
 
 export default routes;
