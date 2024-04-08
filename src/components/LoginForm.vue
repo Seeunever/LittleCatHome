@@ -33,6 +33,7 @@
         },
         methods: {
             submitLoginInfo:function(){
+                alert("submitLoginInfo")
                 var login = new XMLHttpRequest();
                 login.open("POST", host, true);
                 login.setRequestHeader('Content-Type', 'text/plain');
@@ -50,7 +51,7 @@
                         if(resInfo.resResult === '1'){
                             alert("登录成功");
                             alert(resInfo.userId);
-                            router.push('/userHome');
+                            router.push({path: '/userHome', params: {id: resInfo.userId}});
                         }
                     }
                 }

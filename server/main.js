@@ -1,5 +1,6 @@
 var http = require('http');
 var querystring = require('querystring');
+var CryptoJS = require("crypto-js");
 const db = require('../database/user_info.js');
 
 const server = http.createServer((req, res) => {
@@ -27,30 +28,24 @@ const server = http.createServer((req, res) => {
                 let reqTask = JSON.parse(keys[0]).task;
                 let reqInfo = JSON.parse(keys[0]);
                 if (reqTask === "register"){
-                    console.log("if (reqTask === ){");
-                    //register
                     const sql = 'INSERT INTO user_info (username, password) VALUES (?, ?)';
                     const values = [reqInfo.username, reqInfo.password];
                     db.query(sql, values, (error) => {
                     if (error) throw error;
-                        console.log("//insert into database error");
-                        //insert into database error
                     });
                     //注册成功
                     res.end("1");
                 }else if(reqTask === "login"){
-                    //login
                     const sql = 'SELECT * FROM user_info WHERE username = ? and password = ?';
                     const values = [reqInfo.username, reqInfo.password];
                     db.query(sql, values, (error, results) => {
                         let resInfo = [];
                         if (error) throw error;
-                        //insert into database error
                         if (results.length === 0){
                             resInfo.resResult = "0";
                             res.end(JSON.stringify(resInfo));
                         }else{
-                            if(results[0].username === reqInfo.username & results[0].password === reqInfo.password){
+                            if(results[0].username === reqInfo.username & results[0].password === CryptoJS.MD5(reqInfo.password).toString()){
                                 //登录成功
                                 resInfo.userId = reqInfo.id;
                                 resInfo.resResult = "1";
