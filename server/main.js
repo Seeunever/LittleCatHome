@@ -46,11 +46,12 @@ const server = http.createServer((req, res) => {
                             res.end(JSON.stringify(resInfo));
                         }else{
                             if(results[0].username === reqInfo.username & results[0].password === CryptoJS.MD5(reqInfo.password).toString()){
-                                //登录成功
+                                console.log("登录成功");
                                 resInfo.userId = reqInfo.id;
                                 resInfo.resResult = "1";
                                 res.end(JSON.stringify(resInfo));
                             }
+                            console.log("coded password = ", CryptoJS.MD5(reqInfo.password).toString());
                         }
                     });
                 }else{
