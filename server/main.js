@@ -27,11 +27,13 @@ const server = http.createServer((req, res) => {
                 let reqTask = JSON.parse(keys[0]).task;
                 let reqInfo = JSON.parse(keys[0]);
                 if (reqTask === "register"){
+                    console.log("if (reqTask === ){");
                     //register
                     const sql = 'INSERT INTO user_info (username, password) VALUES (?, ?)';
                     const values = [reqInfo.username, reqInfo.password];
                     db.query(sql, values, (error) => {
                     if (error) throw error;
+                        console.log("//insert into database error");
                         //insert into database error
                     });
                     //注册成功
