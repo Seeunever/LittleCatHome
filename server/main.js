@@ -41,14 +41,15 @@ const server = http.createServer((req, res) => {
                     const sql = 'SELECT * FROM user_info WHERE username = ? and password = ?';
                     const values = [reqInfo.username, reqInfo.password];
                     db.query(sql, values, (error, results) => {
+                        let resInfo = [];
                         if (error) throw error;
                         //insert into database error
                         if (results.length === 0){
-                            return res.end("登录失败！");
+                            resInfo.resResult = "0";
+                            res.end(JSON.stringify(resInfo));
                         }else{
                             if(results[0].username === reqInfo.username & results[0].password === reqInfo.password){
                                 //登录成功
-                                let resInfo = [];
                                 resInfo.userId = reqInfo.id;
                                 resInfo.resResult = "1";
                                 res.end(JSON.stringify(resInfo));
