@@ -1,7 +1,6 @@
 var http = require('http');
 var querystring = require('querystring');
-var CryptoJS = require("crypto-js");
-const db = require('../database/user_info.js');
+const db = require('../database/db.js');
 
 const server = http.createServer((req, res) => {
     res.writeHead(200, {
@@ -10,7 +9,6 @@ const server = http.createServer((req, res) => {
     });
 
     if (req.method === 'POST') {
-        //读取JSON
         let body = '';
         req.on('data', chunk => {
             body += chunk.toString();
@@ -28,30 +26,41 @@ const server = http.createServer((req, res) => {
                 let reqTask = JSON.parse(keys[0]).task;
                 let reqInfo = JSON.parse(keys[0]);
                 if (reqTask === "register"){
-                    const sql = 'INSERT INTO user_info (username, password) VALUES (?, ?)';
-                    const values = [reqInfo.username, reqInfo.password];
-                    db.query(sql, values, (error) => {
-                    if (error) throw error;
+                    const isRegisterd = 'SELECT * FROM user_info WHERE username = ?';
+                    const vaule = reqInfo.username;
+                    db.query(isRegisterd, vaule, (error, results) => {
+                        if (error) throw error;
+                        if (results.length !== 0){
+                            //账号已被注册
+                            res.end('0');
+                        }else{
+                            const sql = 'INSERT INTO user_info (username, password) VALUES (?, ?)';
+                            const values = [reqInfo.username, reqInfo.password];
+                            db.query(sql, values, (error) => {
+                            if (error) throw error;
+                            });
+                            //注册成功
+                            res.end("1");
+                        }
                     });
-                    //注册成功
-                    res.end("1");
                 }else if(reqTask === "login"){
                     const sql = 'SELECT * FROM user_info WHERE username = ? and password = ?';
                     const values = [reqInfo.username, reqInfo.password];
                     db.query(sql, values, (error, results) => {
-                        let resInfo = [];
+                        let resInfo = {};
                         if (error) throw error;
                         if (results.length === 0){
+                            //登陆失败，数据库无匹配信息
                             resInfo.resResult = "0";
                             res.end(JSON.stringify(resInfo));
                         }else{
-                            if(results[0].username === reqInfo.username & results[0].password === CryptoJS.MD5(reqInfo.password).toString()){
-                                console.log("登录成功");
-                                resInfo.userId = reqInfo.id;
+                            if(results[0].username === reqInfo.username & results[0].password === reqInfo.password){
+                                resInfo.userId = results[0].id;
                                 resInfo.resResult = "1";
+                                console.log(typeof(resInfo));
+                                console.log(JSON.stringify(resInfo));
                                 res.end(JSON.stringify(resInfo));
                             }
-                            console.log("coded password = ", CryptoJS.MD5(reqInfo.password).toString());
                         }
                     });
                 }else{

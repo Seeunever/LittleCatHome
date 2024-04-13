@@ -13,11 +13,12 @@
 <script>
     import IndexNavigator from './IndexNavigator.vue';
     import DomainLicense from './DomainLicense.vue';
-    import router from '@/router/router';
+    import URL from '../../APP_URL.js';
 
     const CryptoJS = require("crypto-js");
 
-    var host = 'https://server.littlecathome.com/';
+    // var host = URL.URL_RELEASE;
+    var host = URL.URL_DEV;
 
     export default {
         el:'#login-register-info',
@@ -33,7 +34,6 @@
         },
         methods: {
             submitLoginInfo:function(){
-                alert("submitLoginInfo")
                 var login = new XMLHttpRequest();
                 login.open("POST", host, true);
                 login.setRequestHeader('Content-Type', 'text/plain');
@@ -48,10 +48,9 @@
                 login.onreadystatechange = function(){
                     if(this.readyState == 4 & this.status == 200){
                         let resInfo = JSON.parse(login.responseText);
+                        console.log("login.responseText = ", login.responseText)
                         if(resInfo.resResult === '1'){
-                            alert("登录成功");
-                            alert(resInfo.userId);
-                            router.push({path: '/userHome', params: {id: resInfo.userId}});
+                            this.$router.push('/login')
                         }
                     }
                 }

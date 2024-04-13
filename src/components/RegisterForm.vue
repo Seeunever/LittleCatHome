@@ -14,10 +14,12 @@
     import IndexNavigator from './IndexNavigator.vue';
     import DomainLicense from './DomainLicense.vue';
     import router from '@/router/router';
+    import URL from '../../APP_URL.js';
 
     const CryptoJS = require("crypto-js");
 
-    var host = 'https://server.littlecathome.com/';
+    // var host = URL.URL_RELEASE;
+    var host = URL.URL_DEV;
 
     export default {
         name: 'RigisterForm',
@@ -41,6 +43,8 @@
                     password:CryptoJS.MD5(this.password).toString(),
                 };
 
+                console.log("11233 code = ", CryptoJS.MD5(this.password).toString());
+
                 var userInfo = JSON.stringify(user);
                 register.send(userInfo);
                 register.onreadystatechange = function(){
@@ -48,6 +52,8 @@
                         if(register.responseText === '1'){
                             alert("注册成功 请登录");
                             router.push('/login');
+                        }else if(register.responseText === '0'){
+                            alert("账号已被注册，请重新输入账号");
                         }
                     }
                 }

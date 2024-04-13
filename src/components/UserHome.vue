@@ -1,6 +1,9 @@
 <template>
-    <IndexNavigator></IndexNavigator>
-    <DomainLicense></DomainLicense>
+    <div>
+        <IndexNavigator></IndexNavigator>
+        <a>{{id}}</a>
+        <DomainLicense></DomainLicense>
+    </div>
 </template>
 
 <script>
@@ -9,9 +12,7 @@
 
     export default {
         name: 'UserHome',
-        props: {
-            msg: String
-        },
+        props:['id'],
         components: {
             IndexNavigator,
             DomainLicense,
