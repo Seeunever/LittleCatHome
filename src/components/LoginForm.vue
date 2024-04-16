@@ -1,18 +1,14 @@
 <template>
     <div>
-        <IndexNavigator></IndexNavigator>
         <form class="login-form" id="login-register-info" onsubmit="return false">
             <input type="text" name="username" v-model="username">
             <input type="text" name="password" v-model="password">
             <input type="button" v-on:click="submitLoginInfo()" value="登录">
         </form>
-        <DomainLicense></DomainLicense>
     </div>
 </template>
 
 <script>
-    import IndexNavigator from './IndexNavigator.vue';
-    import DomainLicense from './DomainLicense.vue';
     import URL from '../../APP_URL.js';
 
     const CryptoJS = require("crypto-js");
@@ -57,8 +53,6 @@
             }
         },
         components: {
-            IndexNavigator,
-            DomainLicense,
         },
     }
 </script>

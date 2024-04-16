@@ -1,18 +1,14 @@
 <template>
     <div>
-        <IndexNavigator></IndexNavigator>
         <form class="register-form" id="submit-register-info" onsubmit="return false">
             <input type="text" name="username" v-model="username">
             <input type="text" name="password" v-model="password">
             <input type="button" v-on:click="submitRegisterInfo()" value="提交">
         </form>
-        <DomainLicense></DomainLicense>
     </div>
 </template>
 
 <script>
-    import IndexNavigator from './IndexNavigator.vue';
-    import DomainLicense from './DomainLicense.vue';
     import router from '@/router/router';
     import URL from '../../APP_URL.js';
 
@@ -60,8 +56,6 @@
             }
         },
         components: {
-            IndexNavigator,
-            DomainLicense,
         }
     }
 </script>
