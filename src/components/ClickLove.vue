@@ -17,24 +17,21 @@
         }
     }
 
+    import $ from 'jquery';
+
     document.addEventListener('click', function(event) {
         var cat = document.createElement('img');
-        cat.src = "@/assets/logo.png";
-        cat.className = 'click-cat';
-        cat.style.left = event.clientX - 50 + "px";
-        cat.style.top = event.clientY - 50 + "px";
+        cat.src = require("@/assets/logo.png");
+        cat.style.left = event.clientX + "px";
+        cat.style.top = event.clientY + "px";
+        cat.style.width = "20px";
+        cat.style.height = "20px";
+        cat.style.position = "absolute";
+        console.log("x = " + event.clientX + "   y = " + event.clientY);
         document.body.appendChild(cat);
+        $(cat).slideUp(3000);
     });
 </script>
 
 <style scoped>
-.click-cat {
-    width: 100px;
-    height: 100px;
-    transform: rotate(45deg);
-    position: absolute;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-}
 </style>
