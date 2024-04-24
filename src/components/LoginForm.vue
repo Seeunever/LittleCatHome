@@ -10,6 +10,7 @@
 
 <script>
     import URL from '../../APP_URL.js';
+    import router from '@/router/router';
 
     const CryptoJS = require("crypto-js");
 
@@ -46,7 +47,7 @@
                         let resInfo = JSON.parse(login.responseText);
                         console.log("login.responseText = ", login.responseText)
                         if(resInfo.resResult === '1'){
-                            this.$router.push('/login')
+                            router.push({name: 'writeArticle', params: { userId: resInfo.userId}});
                         }
                     }
                 }
@@ -59,13 +60,13 @@
 
 <style scoped>
 .login-form {
-    width: 500px;
-    height: 500px;
+    width: 30vw;
+    height: 30vh;
     margin: auto;
-    font-size: 50px;
+    font-size: 5%;
     color: blue;
     border: 5px solid;
     border-color: cadetblue;
-    border-radius: 10px;
+    border-radius: 10%;
 }
 </style>

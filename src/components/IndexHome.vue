@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="index">
         <div class="content">
             <nav class="nav">
                 <a class="info"  v-on:click="clickSayHello">{{sayHello}}</a>
@@ -8,10 +8,12 @@
                     <router-link class="tag" to="/login">登录</router-link>
                     <router-link class="tag" to="/register">注册</router-link>
                 </div>
-                <a class="go-to-write" v-on:click="goToWrite()">写博客</a>
+                <a class="go-to-write" v-on:click="goToWrite()">想发布信息的话点这里！</a>
             </nav>
-            <RouterView></RouterView>
-            <ClickLove></ClickLove>
+            <div>
+                <router-view class="router-view"></router-view>
+                <ClickLove id="click-love"></ClickLove>
+            </div>
         </div>
         <div class="footer center">宁ICP备2023001566号</div>
     </div>
@@ -37,52 +39,66 @@
             },
             goToWrite:function(){
                 alert("goToWrite");
-                this.$router.push('/writeArticle')
+                this.$router.push('/writeArticle');
             }
         }
     }
 </script>
 
 <style scoped>
+.index{
+    background-color: yellow;
+}
 .content{
-    min-height: calc(100vh - 70px);
+    min-height: 95vh;
 }
 .info{
     float: left;
-    margin-left: 30px;
-}
-.go-to-write{
-    float: right;
-    margin-right: 30px;
+    margin-left: 5%;
 }
 .nav{
     width: 100vw;
     position: fixed;
-    height: 80px;
-    line-height: 80px;
+    height: 5vh;
+    line-height: 5vh;
     background-color: pink;
-    font-size: 30px;
-    font-weight: 30px;
+    font-size: 2vmin;
+    font-weight: bolder;
     font-family: '幼圆';
-    box-shadow: 0 8px 6px -6px gray;
+    box-shadow: 0 2% 2% -2% gray;
 }
 .tag{
     display: inline;
-    width: 100px;
+    width: 10vw;
     color: brown;
-    margin-right: 20px;
-    margin-left: 20px;
+    margin-right: 2%;
+    margin-left: 2%;
     text-decoration: none;
 }
 .nav-bar{
-    float: left;
-    border: 10px;
-    border-color: black;
+    float: right;
+    margin-right: 15%;
+    width: 20vw;
 }
-.center {
+.go-to-write{
+    float: left;
+    margin-left: 10%;
+    color: chocolate;
+}
+#click-love{
+    float: left;
+}
+.router-view{
+    margin-top: 1%;
+    margin-right: 1%;
+    width: 60vw;
+    height: 100vh;
+    float: right;
+}
+.center{
     text-align: center;
 }
-.footer {
-    height: 50px;
+.footer{
+    height: 5vh;
 }
 </style>

@@ -1,9 +1,9 @@
 <template>
     <div>
-        <form class="register-form" id="submit-register-info" onsubmit="return false">
-            <input type="text" name="username" v-model="username">
-            <input type="text" name="password" v-model="password">
-            <input type="button" v-on:click="submitRegisterInfo()" value="提交">
+        <form class="register-form">
+            <div><input class="input" id="input-username" type="text" name="username" v-model="username"></div>
+            <div><input class="input" id="input-password" type="text" name="password" v-model="password"></div>
+            <div><input id="register-button" type="button" v-on:click="submitRegisterInfo()" value="提交"></div>
         </form>
     </div>
 </template>
@@ -39,8 +39,6 @@
                     password:CryptoJS.MD5(this.password).toString(),
                 };
 
-                console.log("11233 code = ", CryptoJS.MD5(this.password).toString());
-
                 var userInfo = JSON.stringify(user);
                 register.send(userInfo);
                 register.onreadystatechange = function(){
@@ -62,13 +60,28 @@
 
 <style scoped>
 .register-form {
-    width: 500px;
-    height: 500px;
-    margin: auto;
-    font-size: 50px;
-    color: blue;
-    border: 5px solid;
-    border-color: cadetblue;
-    border-radius: 10px;
+    width: 30vw;
+    height: 30vh;
+    margin-top: 20%;
+    margin-left: 25%;
+    font-size: 5%;
+    background-color: white;
+    box-shadow:0px 0px 20px #333333;
+}
+.input{
+    width: 5vw;
+    height: 2vh;
+}
+#input-username{
+    margin-top: 8%;
+    margin-left: 10%;
+}
+#input-password{
+    margin-top: 8%;
+    margin-left: 10%;
+}
+#register-button{
+    margin-top: 8%;
+    margin-left: 10%;
 }
 </style>

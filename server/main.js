@@ -63,6 +63,8 @@ const server = http.createServer((req, res) => {
                             }
                         }
                     });
+                }else if(reqTask == "submitArticle"){
+                    const article = reqInfo.article;
                 }else{
                     console.log("others");
                 }

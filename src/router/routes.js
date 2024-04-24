@@ -5,11 +5,35 @@ import UserHome from "@/components/UserHome.vue";
 import WriteArticle from "@/components/WriteArticle.vue";
 
 const routes = [
-    {path: '/', component: IndexHome},
-    {path: '/register', component: RegisterForm},
-    {path: '/login', component: LoginForm},
-    {path: '/userHome/:id', component: UserHome, name:'userHome'},
-    {path: '/writeArticle', component: WriteArticle}
+    {
+        path: '/',
+        component: IndexHome,
+        children: [
+            {
+                path: '',
+                component: RegisterForm,
+            },
+            {
+                path: 'register',
+                component: RegisterForm,
+            },
+            {
+                path: 'login',
+                component: LoginForm,
+            }
+        ]
+    },
+    {
+        name:'userHome',
+        path: '/userHome/:id',
+        component: UserHome,
+    },
+    {
+        name:"writeArticle",
+        path: '/writeArticle/:userId',
+        component: WriteArticle,
+        props: true
+    }
 ]
 
 export default routes;
