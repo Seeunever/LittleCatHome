@@ -14,8 +14,8 @@
 
     const CryptoJS = require("crypto-js");
 
-    // var host = URL.URL_RELEASE;
-    var host = URL.URL_DEV;
+    var host = URL.URL_RELEASE;
+    // var host = URL.URL_DEV;
 
     export default {
         name: 'RigisterForm',

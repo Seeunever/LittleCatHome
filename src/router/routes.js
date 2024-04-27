@@ -18,21 +18,22 @@ const routes = [
                 component: RegisterForm,
             },
             {
+                name:"login",
                 path: 'login',
                 component: LoginForm,
-            }
+            },
+            {
+                name:"writeArticle",
+                path: 'writeArticle/:userId',
+                component: WriteArticle,
+                props: true
+            },
+            {
+                name:'userHome',
+                path: 'userHome/:userId',
+                component: UserHome,
+            },
         ]
-    },
-    {
-        name:'userHome',
-        path: '/userHome/:id',
-        component: UserHome,
-    },
-    {
-        name:"writeArticle",
-        path: '/writeArticle/:userId',
-        component: WriteArticle,
-        props: true
     }
 ]
 

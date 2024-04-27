@@ -8,7 +8,6 @@
                     <router-link class="tag" to="/login">登录</router-link>
                     <router-link class="tag" to="/register">注册</router-link>
                 </div>
-                <a class="go-to-write" v-on:click="goToWrite()">想发布信息的话点这里！</a>
             </nav>
             <div>
                 <router-view class="router-view"></router-view>
@@ -37,10 +36,6 @@
             clickSayHello:function(){
                 this.sayHello = "想喝点什么？"
             },
-            goToWrite:function(){
-                alert("goToWrite");
-                this.$router.push('/writeArticle');
-            }
         }
     }
 </script>

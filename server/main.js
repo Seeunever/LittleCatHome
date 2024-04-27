@@ -64,7 +64,12 @@ const server = http.createServer((req, res) => {
                         }
                     });
                 }else if(reqTask == "submitArticle"){
-                    const article = reqInfo.article;
+                    const sql = 'INSERT INTO article (title, content, create_time, update_time, user_id) VALUES (?, ?, ?, ?, ?)';
+                    const values = [reqInfo.title, reqInfo.article, reqInfo.createTime, reqInfo.updateTime, reqInfo.writerId];
+                    db.query(sql, values, (error) => {
+                        if (error) throw error;
+                        });
+                        res.end("1");
                 }else{
                     console.log("others");
                 }

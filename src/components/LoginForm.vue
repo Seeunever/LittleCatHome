@@ -1,9 +1,9 @@
 <template>
     <div>
-        <form class="login-form" id="login-register-info" onsubmit="return false">
-            <input type="text" name="username" v-model="username">
-            <input type="text" name="password" v-model="password">
-            <input type="button" v-on:click="submitLoginInfo()" value="登录">
+        <form class="login-form">
+            <div><input class="input" id="input-username" type="text" name="username" v-model="username"></div>
+            <div><input class="input" id="input-password" type="text" name="password" v-model="password"></div>
+            <div><input id="login-button" type="button" v-on:click="submitLoginInfo()" value="登录"></div>
         </form>
     </div>
 </template>
@@ -14,8 +14,8 @@
 
     const CryptoJS = require("crypto-js");
 
-    // var host = URL.URL_RELEASE;
-    var host = URL.URL_DEV;
+    var host = URL.URL_RELEASE;
+    // var host = URL.URL_DEV;
 
     export default {
         el:'#login-register-info',
@@ -47,7 +47,8 @@
                         let resInfo = JSON.parse(login.responseText);
                         console.log("login.responseText = ", login.responseText)
                         if(resInfo.resResult === '1'){
-                            router.push({name: 'writeArticle', params: { userId: resInfo.userId}});
+                            localStorage.setItem("isLoggedIn", true);
+                            router.push({name: 'userHome', params: { userId: resInfo.userId}});
                         }
                     }
                 }
@@ -62,11 +63,26 @@
 .login-form {
     width: 30vw;
     height: 30vh;
-    margin: auto;
+    margin-top: 20%;
+    margin-left: 25%;
     font-size: 5%;
-    color: blue;
-    border: 5px solid;
-    border-color: cadetblue;
-    border-radius: 10%;
+    background-color: white;
+    box-shadow:0px 0px 20px #333333;
+}
+.input{
+    width: 5vw;
+    height: 2vh;
+}
+#input-username{
+    margin-top: 8%;
+    margin-left: 10%;
+}
+#input-password{
+    margin-top: 8%;
+    margin-left: 10%;
+}
+#login-button{
+    margin-top: 8%;
+    margin-left: 10%;
 }
 </style>
